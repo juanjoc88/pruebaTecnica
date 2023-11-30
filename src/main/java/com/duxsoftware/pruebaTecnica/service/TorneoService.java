@@ -29,7 +29,6 @@ public class TorneoService {
                 this.registro.add("El jugador " + p.getJugador1() + " ganó el SET");
             }else{
                 setJugador2++;
-
                 this.registro.add("El jugador " + p.getJugador2() + " ganó el SET");
             }
             ns++;
@@ -52,6 +51,11 @@ public class TorneoService {
         while(((gameJugador1 < 6 && gameJugador2 < 6) || Math.abs(gameJugador1 - gameJugador2) < 2) && (gameJugador1 < 7 && gameJugador2 < 7)){
             int puntajeJugador1 = 0;
             int puntajeJugador2 = 0;
+            if(p.isJugador1Saque()){
+            	this.registro.add("El jugador " + p.getJugador1() + " tiene el saque");
+            }else {
+            	this.registro.add("El jugador " + p.getJugador2() + " tiene el saque");
+            }
             while((puntajeJugador1 < 4 && puntajeJugador2 < 4) || Math.abs(puntajeJugador1 - puntajeJugador2) < 2){
                 if(p.isJugador1Saque()){
                     if(random.nextDouble() <= p.getProbabilidad1()){
@@ -83,11 +87,15 @@ public class TorneoService {
         this.puntos[0][numeroSet] = gameJugador1;
         this.puntos[1][numeroSet] = gameJugador2;
         this.p.setPuntos(puntos);
+        String resultadoParcial = "Resultado del " + numeroSet+1 + "° SET: \n"
+        							+ p.getJugador1() + "\t" +gameJugador1 + "\n"
+        							+ p.getJugador2() + "\t" +gameJugador2;
+        this.registro.add(resultadoParcial);
         if(gameJugador1 >= 6){
             return p.getJugador1();
         }else{
             return p.getJugador2();
         }
     }
-	
+    
 }

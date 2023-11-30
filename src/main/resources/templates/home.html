@@ -21,8 +21,8 @@
 	            <input type="text" class="form-control" id="nombreJugador2" name="jugador2" placeholder="Ingrese el nombre del segundo jugador" required="required">
 	        </div> 
 	        <div class="form-group">
-	        	<label for="descripcion">Ingrese probabilidad de ganar del jugador 1</label>
-	            <input type="text" class="form-control" id="probabilidad" name="probabilidad1" placeholder="Debe ir del 1 al 100. Considere que la probabilidad restante será la probabilidad de ganar del jugador 2" required="required">
+	        	<label for="descripcion">Ingrese probabilidad de ganar del jugador 1. Considere que la probabilidad restante será la probabilidad de ganar del jugador 2</label>
+	            <input type="text" class="form-control" id="probabilidad" name="probabilidad1" placeholder="Debe ir del 1 al 100" required="required">
 	        </div> 
 	        <div class="form-group">
 	        	<label for="descripcion">Ingrese cantidad de Sets</label>
@@ -53,8 +53,27 @@
 		<ol >
 			<li th:each="temp:${partido.registro}" th:text="${temp}">
 		</ol>
-		
 	</div>
+	<span th:if="${nombreTorneo != null}">
+		<form th:action="@{/crear}" method="post">
+			<div class="form-group">
+	            <input type="text" class="form-control" name="nombreTorneo" th:value="${partido.nombreTorneo}">
+	        </div>
+			<div class="form-group">
+	           	<input type="text" class="form-control" name="jugador1" th:value="${partido.jugador1}">
+	        </div>
+	        <div class="form-group">
+	            <input type="text" class="form-control" name="jugador2" th:value="${partido.jugador2}">
+	        </div> 
+	        <div class="form-group">
+	            <input type="text" class="form-control" name="probabilidad1" th:value="${partido.probabilidad1 * 100}">
+	        </div> 
+	        <div class="form-group">
+	           	<input type="text" class="form-control" name="sets" th:value="${partido.sets}">
+	        </div>  
+	        <button type="submit" class="btn btn-primary">Jugar Revancha</button>
+		</form>
+	</span>
 
 </body>
 </html>
