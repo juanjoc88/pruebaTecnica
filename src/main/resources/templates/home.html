@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Torneo de Tenis</title>
+</head>
+<body>
+	<h1 th:if="${nombreTorneo != null}"> Torneo [[${nombreTorneo}]]</h1>
+	<span th:if="${nombreTorneo == null}">
+		<form th:action="@{/crear}" method="post">
+			<div class="form-group">
+	        	<label for="descripcion">Nombre Torneo</label>
+	            <input type="text" class="form-control" id="nombreTorneo" name="nombreTorneo" placeholder="Ingrese el nombre del Torneo" required="required">
+	        </div>
+			<div class="form-group">
+	        	<label for="descripcion">Nombre del jugador 1</label>
+	            <input type="text" class="form-control" id="nombreJugador1" name="jugador1" placeholder="Ingrese el nombre del primer jugador" required="required">
+	        </div>
+	        <div class="form-group">
+	        	<label for="descripcion">Nombre del jugador 2</label>
+	            <input type="text" class="form-control" id="nombreJugador2" name="jugador2" placeholder="Ingrese el nombre del segundo jugador" required="required">
+	        </div> 
+	        <div class="form-group">
+	        	<label for="descripcion">Ingrese probabilidad de ganar del jugador 1</label>
+	            <input type="text" class="form-control" id="probabilidad" name="probabilidad1" placeholder="Debe ir del 1 al 100. Considere que la probabilidad restante será la probabilidad de ganar del jugador 2" required="required">
+	        </div> 
+	        <div class="form-group">
+	        	<label for="descripcion">Ingrese cantidad de Sets</label>
+	            <input type="text" class="form-control" id="sets" name="sets" placeholder="Ingrese la cantidad de sets a jugar" required="required">
+	        </div>  
+	        <button type="submit" class="btn btn-primary">Jugar Partido</button>
+		</form>
+	</span>
+
+	<div th:if="${partido != null}">
+		<h4>Nombre del Jugador 1: <strong th:text="${partido.jugador1}"></strong></h4> 
+		<h4>Nombre del Jugador 2: <strong th:text="${partido.jugador2}"></strong></h4>
+		<h5>Probabilidad de ganar del jugador 1: <strong th:text="${partido.probabilidad1}"></strong></h5>
+		<h5>Probabilidad de ganar del jugador 2: <strong th:text="${partido.probabilidad2}"></strong></h5>
+		<h5>Cantidad de SETS: <strong th:text="${partido.sets}"></strong></h5>
+		<table>
+			<tr>
+				<td th:text="${partido.jugador1}"></td>
+				<td th:each="temp2:${lista1}">[[${temp2}]]</td>
+			</tr>
+			<tr>
+				<td th:text="${partido.jugador2}"></td>
+				<td th:each="temp3:${lista2}">[[${temp3}]]</td>
+			</tr>
+		</table>
+		
+		<h6> Registro del partido</h6>
+		<ol >
+			<li th:each="temp:${partido.registro}" th:text="${temp}">
+		</ol>
+		
+	</div>
+
+</body>
+</html>
